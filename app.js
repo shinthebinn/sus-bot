@@ -12,6 +12,12 @@ const client = new Discord.Client({
 
 client.on('ready', () => {
     console.log(`${client.user.tag} is sussy and ready to intrude!`)
+
+    server = client.guilds.cache.get('757321307737030686');
+
+    channel = server.channels.cache.find(chan => chan.name === "general");
+
+    channel.send('sussy!');
 });
 
 client.login(process.env.TOKEN);
