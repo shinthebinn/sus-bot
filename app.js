@@ -11,15 +11,28 @@ const client = new Discord.Client({ // declaring intents so i can actually do st
     ]
 });
 
-messageCheck = function(msg) {
-    let keywords = ["among us", "sus", "sussy", "impostor", "imposter",]
-    keywords.foreach((element, index) => {
-        if (msg.toLowerCase === element) {
-            return index+1
+messageCheck = (msg) => {
+    var keywords = /\bsus(|sy|picious)\b|\bamong us\b|\bimpost(o|e)r\b/i;
+    let final = -1;
+    let match = msg.content.toLowerCase().match(keywords);
+    if (match) {
+        switch(match[0]) {
+            case "among us":
+                final = 0;
+                break;
+            case "sus"||"sussy":
+                final = 1;
+                break;
+            case "suspicious":
+                final = 2;
+                break;
+            case "imposter"||"impostor":
+                final = 3;
+                break;
         }
-    });
+    }
 
-    return 0
+    return final
 }
 
 client.on('ready', () => {
@@ -28,14 +41,20 @@ client.on('ready', () => {
     let server = client.guilds.cache.get('757321307737030686');
 
     let channel = server.channels.cache.find(chan => chan.name === "general");
-
-    channel.send('sussy!');
 });
 
 client.on('messageCreate', (message) => {
-    let value = messageCheck(message)
+    if (message.author.bot === false) {
+        let value = messageCheck(message)
 
-    message.reply(replies.json[value]);
+        if (value >= 0) {
+
+        let reply = replies[value];
+
+        message.reply(reply);
+
+        }
+    }
 });
 
 client.login(process.env.TOKEN);
