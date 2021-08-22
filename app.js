@@ -15,7 +15,7 @@ const client = new Discord.Client({ // declaring intents so i can actually do st
 });
 
 messageCheck = (msg) => { //uses regex to check for matches and then selects the correct index for each response
-    var keywords = /\bsus(|sy|picious)\b|\bamong us\b|\bimpost(o|e)r\b/i; //regex mess
+    var keywords = /\bsus(|sy|picious)\b|\bamo(|n)g(| )us\b|\bimpost(o|e)r\b|\bbaka\b/i; //regex mess
     let final = -1;
     let match = msg.content.toLowerCase().match(keywords); //makes messsage content lower case and then checks against regex
     if (match) {
@@ -23,11 +23,17 @@ messageCheck = (msg) => { //uses regex to check for matches and then selects the
             case "among us":
                 final = 0;
                 break;
+            case "amongus":
+                final = 0;
+                break;
+            case "amogus":
+                final = 6;
+                break;
             case "sus":
                 final = 1;
                 break;
             case "sussy":
-                final = 1;
+                final = 5;
                 break;
             case "suspicious":
                 final = 2;
@@ -37,6 +43,9 @@ messageCheck = (msg) => { //uses regex to check for matches and then selects the
                 break;
             case "impostor":
                 final = 3;
+                break;
+            case "baka":
+                final = 5;
                 break;
         }
     }
