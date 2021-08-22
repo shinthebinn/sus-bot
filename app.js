@@ -1,5 +1,8 @@
 require('dotenv').config(); // imports
 const Discord = require('discord.js');
+const express = require('express');
+const app = express();
+const port = process.env.PORT
 const replies = require('./replies.json');
 const Intents = Discord.Intents; // i dont want to type Discord constantly.
 
@@ -59,4 +62,13 @@ client.on('messageCreate', (message) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send("2 sussy 2 baka");
+});
+
+app.listen(port, () => {
+    console.log(`app listening on port ${port}`);
+})
+
 client.login(process.env.TOKEN); // login to begin a bit of trolling
+
