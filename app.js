@@ -65,22 +65,25 @@ client.on('messageCreate', (message) => {
     }
 });
 
-client.on('guildCreate', (guild) => {
-    let homeServer = client.guilds.cache.get('757321307737030686');
+client.on('guildCreate', (guild) => { // ping me when invited
+    console.log('joined'); // just log the thing lmao
+    let homeServer = client.guilds.cache.get('757321307737030686'); // sets the homeServer (where its gonna ping) to my throne world
 
-    let channel = homeServer.channels.cache.find(name => name === 'sussy-updates');
-    let mention = '<@278663539999113217>'
+    let channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates'); // finds the channel named sussy updates
+    let mention = '<@278663539999113217>' // my mention tag
 
-    channel.send(`${mention}, I have invaded **${guild.name}**`)
-        .then(message => console.log(`Invaded ${guild.name}`));
+    channel.send(`${mention}, I have invaded **${guild.name}**`) // sends the message in the channel
+        .then(message => console.log(`Invaded ${guild.name}`)); // sends a message in the console as well
 });
 
-client.on('guildDelete', (guild) => {
+client.on('guildDelete', (guild) => { // same as before but for when kicked
+    console.log('kicked');
     let homeServer = client.guilds.cache.get('757321307737030686');
 
-    let channel = homeServer.channels.cache.find(name => name === 'sussy-updates');
+    let channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates');
     let mention = '<@278663539999113217>'
 
+    console.log(channel);
     channel.send(`${mention}, I got kicked from **${guild.name}** :(`)
         .then(message => console.log(`Kicked from ${guild.name}`));
 });
