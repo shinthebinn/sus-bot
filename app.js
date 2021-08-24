@@ -83,7 +83,6 @@ client.on('guildDelete', (guild) => { // same as before but for when kicked
     let channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates');
     let mention = '<@278663539999113217>'
 
-    console.log(channel);
     channel.send(`${mention}, I got kicked from **${guild.name}** :(`)
         .then(message => console.log(`Kicked from ${guild.name}`));
 });
