@@ -65,6 +65,26 @@ client.on('messageCreate', (message) => {
     }
 });
 
+client.on('guildCreate', (guild) => {
+    let homeServer = client.guilds.cache.get('757321307737030686');
+
+    let channel = homeServer.channels.cache.find(name => name === 'sussy-updates');
+    let mention = '<@278663539999113217>'
+
+    channel.send(`${mention}, I have invaded **${guild.name}**`)
+        .then(message => console.log(`Invaded ${guild.name}`));
+});
+
+client.on('guildDelete', (guild) => {
+    let homeServer = client.guilds.cache.get('757321307737030686');
+
+    let channel = homeServer.channels.cache.find(name => name === 'sussy-updates');
+    let mention = '<@278663539999113217>'
+
+    channel.send(`${mention}, I got kicked from **${guild.name}** :(`)
+        .then(message => console.log(`Kicked from ${guild.name}`));
+});
+
 app.get('/', (req, res) => {
     res.send("2 sussy 2 baka");
 });
