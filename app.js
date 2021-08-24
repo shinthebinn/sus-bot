@@ -23,7 +23,7 @@ client.on('ready', () => { // simple ready message
 });
 
 client.on('messageCreate',  message => { 
-    if (!message.author.bot && msg.content.toLowerCase().match(keywords)) { //dont reply to yourself dumbass
+    if (!message.author.bot && message.content.toLowerCase().match(keywords)) { //dont reply to yourself dumbass
         message.reply(replies[Math.floor(Math.random()*replies.length)]); //comedy
     }
 });
