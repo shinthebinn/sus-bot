@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT
 const replies = require('./replies.json');
-const Intents = Discord.Intents; // i dont want to type Discord constantly.
+const { Intents } = Discord; // i dont want to type Discord constantly.
 
 const client = new Discord.Client({ // declaring intents so i can actually do stuff
     intents: [
@@ -44,16 +44,16 @@ messageCheck = (msg) => { //uses regex to check for matches and then selects the
         }
     }
 
-    return final
+    return final;
 }
 
 client.on('ready', () => { // simple ready message
     console.log(`${client.user.tag} is sussy and ready to intrude!`)
 });
 
-client.on('messageCreate', (message) => { 
+client.on('messageCreate',  message => { 
     if (message.author.bot === false) { //dont reply to yourself dumbass
-        let value = messageCheck(message) //uses function above
+        const value = messageCheck(message) //uses function above
 
         if (value >= 0) { //if nothing matches dont fucking do this
 
@@ -65,26 +65,26 @@ client.on('messageCreate', (message) => {
     }
 });
 
-client.on('guildCreate', (guild) => { // ping me when invited
+client.on('guildCreate', guild => { // ping me when invited
     console.log('joined'); // just log the thing lmao
-    let homeServer = client.guilds.cache.get('757321307737030686'); // sets the homeServer (where its gonna ping) to my throne world
+    const homeServer = client.guilds.cache.get('757321307737030686'); // sets the homeServer (where its gonna ping) to my throne world
 
-    let channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates'); // finds the channel named sussy updates
-    let mention = '<@278663539999113217>' // my mention tag
+    const channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates'); // finds the channel named sussy updates
+    const mention = '<@278663539999113217>' // my mention tag
 
-    channel.send(`${mention}, I have invaded **${guild.name}**`) // sends the message in the channel
-        .then(message => console.log(`Invaded ${guild.name}`)); // sends a message in the console as well
+    await channel.send(`${mention}, I have invaded **${guild.name}**`) // sends the message in the channel
+    console.log(`Invaded ${guild.name}`); // sends a message in the console as well
 });
 
-client.on('guildDelete', (guild) => { // same as before but for when kicked
+client.on('guildDelete', guild => { // same as before but for when kicked
     console.log('kicked');
-    let homeServer = client.guilds.cache.get('757321307737030686');
+    const homeServer = client.guilds.cache.get('757321307737030686');
 
-    let channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates');
-    let mention = '<@278663539999113217>'
+    const channel = homeServer.channels.cache.find(channel => channel.name === 'sussy-updates');
+    const mention = '<@278663539999113217>'
 
-    channel.send(`${mention}, I got kicked from **${guild.name}** :(`)
-        .then(message => console.log(`Kicked from ${guild.name}`));
+    await channel.send(`${mention}, I got kicked from **${guild.name}** :(`)
+    console.log(`Kicked from ${guild.name}`);
 });
 
 app.get('/', (req, res) => {
